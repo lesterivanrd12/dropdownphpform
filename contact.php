@@ -42,16 +42,16 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     <div class="form-container">
         <form class="form-row" action="" method="post">
             <label for="fname">First Name:</label>
-            <input type="text" id="fname" name="fname" placeholder="John">
+            <input type="text" id="fname" name="fname" placeholder="John"><br>
 
             <label for="lname">Last Name:</label>
-            <input type="text" id="lname" name="lname" placeholder="Doe">
+            <input type="text" id="lname" name="lname" placeholder="Doe"><br>
 
             <label for="pnumber">Phone Number:</label>
-            <input type="text" id="pnumber" name="pnumber" placeholder="09123456789">
+            <input type="text" id="pnumber" name="pnumber" placeholder="09123456789"><br>
 
             <label for="email">Email:</label>
-            <input type="text" id="email" name="email" placeholder="example@email.com">
+            <input type="text" id="email" name="email" placeholder="example@email.com"><br>
 
             <label for="region">Region: </label>
             <select name="region" id="region">
@@ -63,7 +63,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                         echo "<option value=".$data['region'].">".$data['region']."</option>";
                     }
                 ?>
-            </select>
+            </select><br>
 
             <label for="province">Province: </label>
             <select name="province" id="province">
@@ -75,7 +75,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                         echo "<option value=".$data['province'].">".$data['province']."</option>";
                     }
                 ?>
-            </select> 
+            </select><br>
 
             <label for="city">City: </label>
             <select name="city" id="city">
@@ -87,7 +87,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                         echo "<option value=".$data['city'].">".$data['city']."</option>";
                     }
                     ?>
-            </select> 
+            </select><br>
 
             <label for="barangay">Barangay: </label>
             <select name="barangay" id="barangay">
@@ -99,9 +99,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                         echo "<option value=".$data['barangay'].">".$data['barangay']."</option>";
                     }
                 ?>
-            </select>
+            </select><br>
 
-            <textarea name="message" id="message" cols="30" rows="10"></textarea>
+            <textarea name="message" id="message" cols="30" rows="10"></textarea><br>
             <input type="submit" value="Submit">
         </form>
     </div>
