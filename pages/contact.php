@@ -2,6 +2,31 @@
 
     require_once('../utils/conn.php');
 
+    if($_SERVER["REQUEST_METHOD"] == "POST") {
+
+        $fname = $_POST["fname"];
+        $lname = $_POST["lname"];
+        $email = $_POST["email"];
+        $pnumber = $_POST["pnumber"];
+        $snumber = $_POST["snumber"];
+        $region = $_POST["region"];
+        $province = $_POST["province"];
+        $city = $_POST["city"];
+        $barangay = $_POST["barangay"];
+        $msg = $_POST["msg"];
+
+    
+
+        $sql = "INSERT INTO `contact`(`first_name`, `last_name`, `email`, `pnumber`, `snumber`, `region`, `province`, `city`, `barangay`, `message`) VALUES ('$fname','$lname','$email','$pnumber','$snumber','$region','$province','$city','$barangay','$msg')";
+
+        if (mysqli_query($connect, $sql)) {
+            echo("<script>alert('Data stored in a database successfully')</script>");
+        } else {
+            echo("Error: ". mysqli_connect_error($connect));
+        }
+
+    }
+
 ?>
 
 <!DOCTYPE html>
@@ -13,6 +38,29 @@
     <link rel="stylesheet" href="/dropdownphpform/assets/contact.css">
     <link rel="stylesheet" href="/dropdownphpform/assets/index.css">
     <title>Contact Page</title>
+    <script src="jquery-3.6.0.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#city option").hide();
+            $("#brgy option").hide();
+
+            $(province).change(function(){
+                var val=$(this).val();
+                $("#city option").hide();
+                $("#city").val("");
+                $("#city [data-city='" + val + "']").show();
+                $("#city").change();
+            });
+
+            $("#city").change(function(){
+                var val=$(this).find(":selected").prop("id");
+                $("#brgy option").hide();
+                $("#brgy").val("");
+                $("#brgy [data-brgy='" + val + "']").show();
+                $("#brgy").change();
+            });
+        });
+    </script>
 </head>
 <body>
     
@@ -41,7 +89,7 @@
                 <input type="text" name="snumber" placeholder="123 St." required>
 
                 <label for="region">Region:</label>
-                <select name="region" id="">
+                <select name="region" id="region">
                     <option value=""></option>
                     <?php
                     // _
@@ -55,7 +103,7 @@
                 </select>
 
                 <label for="province">Province:</label>
-                <select name="province" id="">
+                <select name="province" id="province">
                     <option value=""></option>
                     <?php
                     // _
@@ -69,7 +117,7 @@
                 </select>
 
                 <label for="city">City:</label>
-                <select name="city" id="">
+                <select name="city" id="city">
                     <option value=""></option>
                     <?php
                     // _
@@ -83,7 +131,7 @@
                 </select>
 
                 <label for="barangay">Barangay:</label>
-                <select name="barangay" id="">
+                <select name="barangay" id="barangay">
                     <option value=""></option>
                     <?php
                     // _
@@ -105,30 +153,6 @@
     </div>
 
     <?php include 'footer.php'?>
-
-
-    <script>
-        $(document).ready(function(){
-            $("#city option").hide();
-            $("#brgy option").hide();
-
-            $(province).change(function(){
-                var val=$(this).val();
-                $("#city option").hide();
-                $("#city").val("");
-                $("#city [data-city='" + val + "']").show();
-                $("#city").change();
-            });
-
-            $("#city").change(function(){
-                var val=$(this).find(":selected").prop("id");
-                $("#brgy option").hide();
-                $("#brgy").val("");
-                $("#brgy [data-brgy='" + val + "']").show();
-                $("#brgy").change();
-            });
-        });
-    </script>
 
 </body>
 </html>
