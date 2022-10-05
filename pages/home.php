@@ -11,6 +11,9 @@
 
     <?php include 'header.php'?>
     
+    <div class="hero-section">
+
+    </div>
 
     <?php include 'footer.php'?>
 

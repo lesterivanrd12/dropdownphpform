@@ -1,6 +1,6 @@
 <?php
 
-    require_once('../utils/conn.php');
+    require_once('../utils/conn.php'); //I REQUIRE SA NI NIYA NA ICHECK OR I RUN
 
     if($_SERVER["REQUEST_METHOD"] == "POST") {
 
@@ -16,7 +16,6 @@
         $msg = $_POST["msg"];
 
     
-
         $sql = "INSERT INTO `contact`(`first_name`, `last_name`, `email`, `pnumber`, `snumber`, `region`, `province`, `city`, `barangay`, `message`) VALUES ('$fname','$lname','$email','$pnumber','$snumber','$region','$province','$city','$barangay','$msg')";
 
         if (mysqli_query($connect, $sql)) {
@@ -41,25 +40,36 @@
     <script src="jquery-3.6.0.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function(){
+            $("#province option").hide();
             $("#city option").hide();
-            $("#brgy option").hide();
+            $("#barangay option").hide();
 
-            $(province).change(function(){
+            $(region).change(function(){
                 var val=$(this).val();
+                $("#province option").hide();
+                $("#province").val("");
+                $("#province [data-province='" + val + "']").show();
+                $("#province").change();
+            });
+
+            $("#province").change(function(){
+                var val=$(this).find(":selected").prop("id");
                 $("#city option").hide();
                 $("#city").val("");
-                $("#city [data-city='" + val + "']").show();
+                $("#city [data-brgy='" + val + "']").show();
                 $("#city").change();
             });
 
             $("#city").change(function(){
                 var val=$(this).find(":selected").prop("id");
-                $("#brgy option").hide();
-                $("#brgy").val("");
-                $("#brgy [data-brgy='" + val + "']").show();
-                $("#brgy").change();
+                $("#barangay option").hide();
+                $("#barangay").val("");
+                $("#barangay [data-brgy='" + val + "']").show();
+                $("#barangay").change();
             });
         });
+
+
     </script>
 </head>
 <body>
